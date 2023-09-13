@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="crm:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="98500c42-b28f-40ef-b009-334fa073331f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/crm-mybatisGenerate/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm-mybatisGenerate/src/main/resources/generator.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm-mybatisGenerate/src/main/resources/generatorConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/README.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/commons/pojo/ReturnJson.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/commons/utils/DateUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/contants/CodeConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/settings/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/settings/pojo/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/settings/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/settings/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/settings/web/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/settings/web/interceptor/LoginInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/web/controller/IndexController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/workbench/web/controller/ActivityController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/workbench/web/controller/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/java/com/zzk/crm/workbench/web/controller/WorkbenchIndexController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/resources/applicationContext.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/resources/applicationContext_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/resources/applicationContext_mvc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/resources/com/zzk/crm/settings/mapper/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/resources/jdbc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/resources/log4j2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/resources/mybatis-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/dictionary/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/dictionary/type/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/dictionary/type/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/dictionary/type/save.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/dictionary/value/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/dictionary/value/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/dictionary/value/save.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/qx/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/qx/permission/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/qx/role/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/qx/role/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/qx/user/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/qx/user/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/settings/qx/user/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/activity/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/activity/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/chart/activity/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/chart/clue/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/chart/customerAndContacts/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/chart/transaction/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/clue/convert.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/clue/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/clue/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/contacts/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/contacts/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/customer/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/customer/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/main/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/transaction/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/transaction/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/transaction/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/pages/workbench/transaction/save.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/image/IMG_7114.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/image/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/image/user-thumbnail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap-datetimepicker-master_bak/css/bootstrap-datetimepicker.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap-datetimepicker-master_bak/js/bootstrap-datetimepicker.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap-datetimepicker-master_bak/locale/bootstrap-datetimepicker.zh-CN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0/css/bootstrap-theme.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0/js/npm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0_bak/css/bootstrap-theme.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0_bak/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0_bak/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0_bak/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0_bak/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0_bak/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0_bak/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bootstrap_3.3.0_bak/js/npm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bs_pagination-master/css/jquery.bs_pagination.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bs_pagination-master/js/jquery.bs_pagination.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bs_pagination-master/localization/el.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bs_pagination-master/localization/el.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bs_pagination-master/localization/en.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bs_pagination-master/localization/en.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bs_pagination-master/localization/ru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bs_pagination-master/localization/ru.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/bs_typeahead/bootstrap3-typeahead.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/echars/echarts.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/jquery-1.11.1-min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/1_close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/1_open.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/line_conn.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/zTreeStandard.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/zTreeStandard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/zTreeStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crm/src/main/webapp/jquery/zTree_v3-master/js/jquery.ztree.all.min.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+    <option name="PARALLEL_COMPILATION" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jsp File" />
+        <option value="Mybatis核心配置文件" />
+        <option value="log4j2文件" />
+        <option value="spring-beans.schema" />
+        <option value="Interface" />
+        <option value="generatorConfig文件" />
+        <option value="generatorConfig文件高级版" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\maven\repository" />
+        <option name="mavenHome" value="C:/Program Files/Java/apache-maven-3.9.3" />
+        <option name="useMavenConfig" value="true" />
+        <option name="userSettingsFile" value="C:\Program Files\Java\apache-maven-3.9.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2VFCoRvV2Vc5ON0uE4GEDjJAn81" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;8&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Workspace/CRM-Project/crm/src/main/webapp/WEB-INF/pages/workbench&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;JavaScript.Libraries&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;1fece0cb254f1f45891bc9ee9fed72a9&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Workspace\CRM-Project\crm\src\main\webapp\WEB-INF\pages\workbench" />
+      <recent name="D:\Workspace\CRM-Project\crm\src\main\webapp\WEB-INF\pages" />
+      <recent name="D:\Workspace\CRM-Project\crm\src\main\webapp\WEB-INF\crm" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Workspace\CRM-Project\crm\src\main\webapp" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 9.0.73" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.73" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://127.0.0.1:8080/crm/" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <deployment>
+        <artifact name="crm:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/crm" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="0df41632-df57-4492-81b3-955da716e4e4" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="63757" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="crm:war exploded" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="98500c42-b28f-40ef-b009-334fa073331f" name="Changes" comment="" />
+      <created>1694422615943</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1694422615943</updated>
+      <workItem from="1694422617105" duration="1027000" />
+      <workItem from="1694429715262" duration="1531000" />
+      <workItem from="1694434172217" duration="29000" />
+      <workItem from="1694434323337" duration="854000" />
+      <workItem from="1694435221673" duration="45000" />
+      <workItem from="1694435381766" duration="99000" />
+      <workItem from="1694435491814" duration="1651000" />
+      <workItem from="1694481953336" duration="31360000" />
+      <workItem from="1694534397723" duration="1887000" />
+      <workItem from="1694537106903" duration="264000" />
+      <workItem from="1694566986407" duration="22127000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

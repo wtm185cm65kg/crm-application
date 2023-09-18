@@ -2,7 +2,7 @@ package com.zzk.crm.settings.web.controller;
 
 import com.zzk.crm.commons.pojo.ReturnJson;
 import com.zzk.crm.commons.utils.DateUtil;
-import com.zzk.crm.contants.CodeConstant;
+import com.zzk.crm.contants.Constants;
 import com.zzk.crm.settings.pojo.User;
 import com.zzk.crm.settings.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,28 +66,28 @@ public class UserController {
 
         //根据查询结果生成响应信息
         if (user==null){//user为null说明用户名或密码错误导致select没有查出结果
-            returnJson.setCode(CodeConstant.RETURN_OBJECT_CODE_FAIL);
+            returnJson.setCode(Constants.RETURN_OBJECT_CODE_FAIL);
             returnJson.setMessage("用户名或密码错误");
         }else{//user不为null说明获得账户信息，要进一步判断账号是否合法
             //判断账号是否过期
             String nowTime = DateUtil.formatDateTime19(new Date());
             if (nowTime.compareTo(user.getExpireTime())>0){
                 //当前nowTime大于expireTime说明账户已经过期了
-                returnJson.setCode(CodeConstant.RETURN_OBJECT_CODE_FAIL);
+                returnJson.setCode(Constants.RETURN_OBJECT_CODE_FAIL);
                 returnJson.setMessage("账户已经过期！");
             }else if ("0".equals(user.getLockState())){//账号没有过期，则判断账号是否被锁定
                 //当lockState==0说明当前账户被锁定
-                returnJson.setCode(CodeConstant.RETURN_OBJECT_CODE_FAIL);
+                returnJson.setCode(Constants.RETURN_OBJECT_CODE_FAIL);
                 returnJson.setMessage("账户被锁定！");
             }else if (!user.getAllowIps().contains(request.getRemoteAddr())) {//账号没有过期、锁定，则判断账号是否在安全ip下登录
                 //当前ip地址被包含在allowIps时说明没有在安全环境下登录
-                returnJson.setCode(CodeConstant.RETURN_OBJECT_CODE_FAIL);
+                returnJson.setCode(Constants.RETURN_OBJECT_CODE_FAIL);
                 returnJson.setMessage("没有在安全环境下登录！");
             }else {//运行到这里说明以上判断条件均不成立，可以成功登录
-                returnJson.setCode(CodeConstant.RETURN_OBJECT_CODE_SUCCESS);
+                returnJson.setCode(Constants.RETURN_OBJECT_CODE_SUCCESS);
 
                 //将service获取的user放入session域,以便将处理好的数据信息传到视图层(jsp)
-                session.setAttribute(CodeConstant.SESSION_USER,user);
+                session.setAttribute(Constants.SESSION_USER,user);
 
                 /**如果选中了十天免登录则要生成Cookie以记住密码*/
                 if ("true".equals(isRemPwd)){

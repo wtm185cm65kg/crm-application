@@ -1,6 +1,6 @@
 package com.zzk.crm.settings.web.interceptor;
 
-import com.zzk.crm.contants.CodeConstant;
+import com.zzk.crm.contants.Constants;
 import com.zzk.crm.settings.pojo.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -16,7 +16,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         //验证用户是否登陆过
         /**拦截器中不能像控制器里一样直接将HttpSession作为内置对象直接放入拦截器方法参数中
          * 在拦截器中应通过HttpServletRequest对象获取HttpSession对象*/
-        User user = (User)request.getSession().getAttribute(CodeConstant.SESSION_USER);
+        User user = (User)request.getSession().getAttribute(Constants.SESSION_USER);
         if (user==null){//说明想绕过登陆界面登录 或 session域中的数据达到超时时长被自动清除
             response.sendRedirect(request.getContextPath()); /**重定向时必须要获取项目名称，再跳转到相应页面*/
             return false;

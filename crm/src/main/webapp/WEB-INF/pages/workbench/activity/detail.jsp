@@ -1,13 +1,86 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+%>
 <html>
 <head>
+	<base href="<%=basePath%>">
 <meta charset="UTF-8">
 
-<link href="../../jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="../../jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+	/*给'修改'按钮添加单击事件*/
+	$("#createActivityBtn").click(function (){
+		//弹出'创建市场活动的模态窗口'
+		$("#editRemarkModal").modal("show");
+	});
+
+	/*给'保存'按钮添加单击事件*/
+	$("#saveBtn").click(function (){
+		//收集参数
+		let owner=$("#create-marketActivityOwner").val();
+		let name=$.trim($("#create-marketActivityName").val());
+		let startDate=$.trim($("#create-startTime").val());
+		let endDate=$.trim($("#create-endTime").val());
+		let cost=$.trim($("#create-cost").val());
+		let description=$("#create-describe").val();
+		let id=$("#create-describe").val();
+
+		//表单验证
+		if (owner==""){
+			alert("所有者不能为空！");
+			return;
+		}
+		if (name==""){
+			alert("名称不能为空！");
+			return;
+		}
+		//先判断是否填写了开始和结束日期，如果填写了再进行判断
+		if (startDate!=""&&endDate!=""){
+			if (startDate>endDate){
+				alert("开始日期不能大于结束日期！");
+				return;
+			}
+		}
+		let regExp=/^(([1-9]\d*)|0)$/;
+		if (!regExp.test(cost)){
+			alert("成本只能是非负整数！");
+			return;
+		}
+
+		//发送Ajax请求
+		$.ajax({
+			url:'workbench/activity/modifyActivity.do',
+			data:{
+				owner:owner,
+				name:name,
+				startDate:startDate,
+				endDate:endDate,
+				cost:cost,
+				description:description,
+				id:id
+			},
+			type:'post',
+			dataType:'json',
+			success:function (data) {
+				if(data.code=="1"){
+					//关闭模态窗口
+					$("#createActivityModal").modal("hide");
+					//刷新市场活动列，显示第一页数据，《《保持每页显示条数不变（动态获取pageSize，详见$(".mydate").datetimepicker({})的success）》》
+					queryActivityByConditionForPage(1,$("#demo_pag1").bs_pagination('getOption', 'rowsPerPage'));
+				}else{
+					//提示信息创建失败
+					$("#msg").text(data.message);
+					//模态窗口不关闭 (可以省略不写，但是习惯上可以添加，不会对原弹出的模态窗口有任何影响)
+					$("#createActivityModal").modal("show");
+					//市场活动列表也不刷新
+				}
+			}
+		});
+	});
 
 	//默认情况下取消和保存按钮是隐藏的
 	var cancelAndSaveBtnDefault = true;
@@ -139,7 +212,7 @@
 		<div style="position: relative; left: 40px; height: 30px; top: 50px;">
 			<div style="width: 300px; color: gray;">描述</div>
 			<div style="width: 630px;position: relative; left: 200px; top: -20px;">
-				<b>
+				<b id="update-describe">
 					市场活动Marketing，是指品牌主办或参与的展览会议与公关市场活动，包括自行主办的各类研讨会、客户交流会、演示会、新产品发布会、体验会、答谢会、年会和出席参加并布展或演讲的展览会、研讨会、行业交流会、颁奖典礼等
 				</b>
 			</div>

@@ -21,6 +21,7 @@
 
     <!-- 扫描注解(mapper层由application_mapper中扫描,controller层由application_mvc中扫描) -->
     <context:component-scan base-package="com.zzk.crm.settings.service" />
+    <context:component-scan base-package="com.zzk.crm.workbench.service" />
 
     <!-- 导入数据相关配置 -->
     <import resource="applicationContext_mapper.xml" />

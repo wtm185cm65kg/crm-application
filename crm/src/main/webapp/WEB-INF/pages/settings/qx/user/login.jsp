@@ -53,12 +53,6 @@
 						$("#msg").text(data.message);
 					}
 				},
-				beforeSend:function () {//当ajax向后台发送请求之前，会自动执行本函数；
-					//该函数的返回值能够决定ajax是否真正向后台发送请求：
-					//如果该函数返回true,则ajax会真正向后台发送请求；否则，如果该函数返回false，则ajax放弃向后台发送请求。
-					$("#msg").text("正在努力验证....");
-					return true;
-				},
 				beforeSend:function (){ //当Ajax向后台发送请求前会执行本函数(一般)
 					//该函数的返回值能够决定Ajax是否真正向后端发请求(执行结果为true会成功发请求，执行结果为false则会选择不发送本次请求)
 					//可以将表单验证、在等待验证前显示提示信息的操作放入这里

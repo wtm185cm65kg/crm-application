@@ -2,6 +2,7 @@ package com.zzk.crm.settings.mapper;
 
 import com.zzk.crm.settings.pojo.User;
 
+import java.util.List;
 import java.util.Map;
 
 public interface UserMapper {
@@ -55,8 +56,12 @@ public interface UserMapper {
 
     /**
      * 根据账号和密码查询用户
-     * @param map
-     * @return
      */
     User selectUserByLoginActAndPwd(Map<String,Object> map);
+
+    /**
+     * 查询所有的用户
+     * 实际上只需要id和name两个字段，但为了复用性还是查询所有用户（离职用户除外，即lock_state != '1'）
+     */
+    List<User> selectAllUsers();
 }

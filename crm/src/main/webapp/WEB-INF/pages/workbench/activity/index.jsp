@@ -207,7 +207,6 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
                         str.substring(startIndex,endIndex)  //从下标为startIndex的字符开始截取，截取到下标是endIndex的字符*/
 					//ids = ids.substring(0,checkeds.size()-1);
 					ids = ids.substr(0,ids.length-1);
-					alert(ids);
 
 					//发送ajax请求
 					$.ajax({
@@ -342,6 +341,91 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 				}
 			});
 		});
+
+
+		/*给'批量导出按钮'添加单击事件*/
+		$("#exportActivityAllBtn").click(function (){
+			/*向后台发送导出请求（发送文件一律使用同步请求post/get）*/
+			window.location.href="workbench/activity/exportActivityExcel.do";
+		});
+
+		/*给'选择导出按钮'添加单击事件*/
+		$("#exportActivityXzBtn").click(function (){
+			let checkeds=$("#tBody input[type='checkbox']:checked");
+			if (checkeds.size()!=0){
+				//收集参数
+				let ids="";
+				$.each(checkeds,function (){
+					ids += "id="+this.value+"&";
+				});
+				ids = ids.substr(0,ids.length-1);
+
+				//发送同步请求get并携带参数ids
+				window.location.href="workbench/activity/exportSelectedActivityExcel.do?"+ids;
+			}else{
+				alert("请先选择需要导出的市场活动！")
+			}
+		});
+
+		/*给'导入按钮'添加单击事件*/
+		$("#importActivityBtn").click(function (){
+			//收集参数1：获取文件名，用于获取文件后缀名进行表单验证
+			/*对于文件而言，直接调用其val()并不能拿到该文件，只能拿到文件的绝对路径名*/
+			let activityFileName=$("#activityFile").val();
+			//表单验证1.1: 是否选择了文件
+			if (activityFileName=="" || activityFileName==null){
+				alert("请先选择.xls文件！");
+				return;
+			}
+			let suffix=activityFileName.substring(activityFileName.lastIndexOf("."));	//截取文件后缀名，以用于判断文件是否合法
+			//表单验证1.2: 后缀名必须为.xls（不区分大小写）
+			if (suffix.toLowerCase()!=".xls"){
+				alert("只支持'.xls'格式的文件！");
+				return;
+			}
+
+			//收集参数2：获取文件本身，一是用于发送给后端，二是用于进行文件大小的表单验证
+			/*对于文件而言，想拿到该文件本身，必须先获取其dom对象
+			* 获取dom对象：1.$("#activityFile")[0]	 2.$("#activityFile").get(0)	3.document.getElementsById("activityFile")
+			* 再获取其files属性(这里files[0]是为了获取多个文件的第一个文件)*/
+			let activityFile=$("#activityFile")[0].files[0];
+			//表单验证2: 文件大小不能超过5MB（size以byte为最小单位）
+			if (activityFile.size>5*1024*1024){
+				alert("文件大小不能超过5MB！");
+				return;
+			}
+
+			//前面的表单验证通过后就可以向后端发送请求了
+			/*因为要求导入成功后并不会跳转页面，而是停留在原页面，因此应使用异步请求ajax*/
+			//FormData是JS中的接口，相当于Java中的类.	使用FormData对象封装各类型参数（二进制流、文本）,可以模拟键值对向后台提交参数
+			let formData = new FormData();
+			formData.append("activityFile",activityFile);	//以键值对形式封装文件，该key就相当于name=value中的name，后端自动承接的形参名要与该key保持一致
+			formData.append("activityFile","zzk");	//以键值对形式封装文本
+			$.ajax({
+				url:'workbench/activity/importActivityExcel.do',
+				data:formData,	//传入FormData对象
+				processData:false,	//设置ajax向后台提交参数之前，是否把参数统一转换成字符串
+				contentType:false,	//设置ajax向后台提交参数之前，是否把所有的参数统一按urlencoded编码
+				type:'post',
+				dataType:'json',
+				success:function (data){
+					if (data.code=="1"){
+						//提示成功导入记录条数
+						alert("导入["+data.retData+"]条记录成功");
+						//关闭模态窗口
+						$("#importActivityModal").modal("hide");
+						//刷新市场活动列表,显示第一页数据,保持每页显示条数不变
+						queryActivityByConditionForPage(1,$("#demo_pag1").bs_pagination('getOption', 'rowsPerPage'));
+					}else{
+						//提示信息
+						alert(data.message);
+						//模态窗口不关闭
+						$("#importActivityModal").modal("show");
+						//列表也不刷新
+					}
+				}
+			});
+		});
 	});
 
 	/*在入口函数外封装 按查询条件检索数据 功能
@@ -379,7 +463,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 				$.each(data.activityList,function (index,obj){
 					htmlStr+="<tr class='active'>";
 					htmlStr+="<td><input type='checkbox' class='deleteCheckbox' value='"+obj.id+"'/></td>";
-					htmlStr+="<td><a style='text-decoration: none; cursor: pointer;' onclick=\"window.location.href='detail.jsp';\">"+obj.name+"</a></td>";
+					htmlStr+="<td><a style='text-decoration: none; cursor: pointer;' onclick=\"window.location.href='workbench/activity/detailActivity.do?id="+obj.id+"'\">"+obj.name+"</a></td>";
 					htmlStr+="<td>"+obj.owner+"</td>";
 					htmlStr+="<td>"+obj.startDate+"</td>";
 					htmlStr+="<td>"+obj.endDate+"</td>";

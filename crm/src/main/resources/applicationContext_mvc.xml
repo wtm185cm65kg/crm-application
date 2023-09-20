@@ -44,13 +44,8 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    <!-- 配置文件上传解析器 id:必须是multipartResolver-->
-    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="#{1024*1024*80}"/>
-        <property name="defaultEncoding" value="utf-8"/>
-    </bean>-->
 
-    <!---->
+    <!--配置拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
             <!--配置拦截的请求-->
@@ -63,4 +58,12 @@
             <bean class="com.zzk.crm.settings.web.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <!-- 配置文件上传解析器 id:必须是multipartResolver-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置文件最大上传大小为5M（其实一般不在这里设置，一般在前端进行文件大小的过滤）-->
+        <property name="maxUploadSize" value="#{1024*1024*5}"/>
+        <!--设置文件的默认编码格式-->
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
 </beans>

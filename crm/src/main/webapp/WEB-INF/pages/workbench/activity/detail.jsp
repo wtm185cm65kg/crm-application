@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+	String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 %>
 <html>
 <head>
@@ -12,76 +12,6 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-	/*给'修改'按钮添加单击事件*/
-	$("#createActivityBtn").click(function (){
-		//弹出'创建市场活动的模态窗口'
-		$("#editRemarkModal").modal("show");
-	});
-
-	/*给'保存'按钮添加单击事件*/
-	$("#saveBtn").click(function (){
-		//收集参数
-		let owner=$("#create-marketActivityOwner").val();
-		let name=$.trim($("#create-marketActivityName").val());
-		let startDate=$.trim($("#create-startTime").val());
-		let endDate=$.trim($("#create-endTime").val());
-		let cost=$.trim($("#create-cost").val());
-		let description=$("#create-describe").val();
-		let id=$("#create-describe").val();
-
-		//表单验证
-		if (owner==""){
-			alert("所有者不能为空！");
-			return;
-		}
-		if (name==""){
-			alert("名称不能为空！");
-			return;
-		}
-		//先判断是否填写了开始和结束日期，如果填写了再进行判断
-		if (startDate!=""&&endDate!=""){
-			if (startDate>endDate){
-				alert("开始日期不能大于结束日期！");
-				return;
-			}
-		}
-		let regExp=/^(([1-9]\d*)|0)$/;
-		if (!regExp.test(cost)){
-			alert("成本只能是非负整数！");
-			return;
-		}
-
-		//发送Ajax请求
-		$.ajax({
-			url:'workbench/activity/modifyActivity.do',
-			data:{
-				owner:owner,
-				name:name,
-				startDate:startDate,
-				endDate:endDate,
-				cost:cost,
-				description:description,
-				id:id
-			},
-			type:'post',
-			dataType:'json',
-			success:function (data) {
-				if(data.code=="1"){
-					//关闭模态窗口
-					$("#createActivityModal").modal("hide");
-					//刷新市场活动列，显示第一页数据，《《保持每页显示条数不变（动态获取pageSize，详见$(".mydate").datetimepicker({})的success）》》
-					queryActivityByConditionForPage(1,$("#demo_pag1").bs_pagination('getOption', 'rowsPerPage'));
-				}else{
-					//提示信息创建失败
-					$("#msg").text(data.message);
-					//模态窗口不关闭 (可以省略不写，但是习惯上可以添加，不会对原弹出的模态窗口有任何影响)
-					$("#createActivityModal").modal("show");
-					//市场活动列表也不刷新
-				}
-			}
-		});
-	});
-
 	//默认情况下取消和保存按钮是隐藏的
 	var cancelAndSaveBtnDefault = true;
 	
@@ -228,7 +158,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 		
 		<!-- 备注1 -->
 		<div class="remarkDiv" style="height: 60px;">
-			<img title="zhangsan" src="../../image/user-thumbnail.png" style="width: 30px; height:30px;">
+			<img title="zhangsan" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
 			<div style="position: relative; top: -40px; left: 40px;" >
 				<h5>哎呦！</h5>
 				<font color="gray">市场活动</font> <font color="gray">-</font> <b>发传单</b> <small style="color: gray;"> 2017-01-22 10:10:10 由zhangsan</small>
@@ -242,7 +172,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 		
 		<!-- 备注2 -->
 		<div class="remarkDiv" style="height: 60px;">
-			<img title="zhangsan" src="../../image/user-thumbnail.png" style="width: 30px; height:30px;">
+			<img title="zhangsan" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
 			<div style="position: relative; top: -40px; left: 40px;" >
 				<h5>呵呵！</h5>
 				<font color="gray">市场活动</font> <font color="gray">-</font> <b>发传单</b> <small style="color: gray;"> 2017-01-22 10:20:10 由zhangsan</small>

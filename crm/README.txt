@@ -23,8 +23,10 @@ controller包的放置规则：
 
 选择封装json时,为了让方法更通用，一般选择方法返回值为Object
 
-window.location.href="" 的含义：window代表浏览器，location代表地址栏，href代表要输入url，也就是说通过代码实现了向浏览器地址栏键入url
-
+发送同步请求：
+    window.location.href="" 的含义：window代表浏览器，location代表地址栏，href代表要输入url，也就是说通过代码实现了向浏览器地址栏键入url
+发送异步请求：
+    框架工具封装的函数（如这里使用的是jQuery的ajax()方法->$.ajax({url:'',date:{},datatype:'',type:'',success:function(){})
 关于window.open("url","参数/iframe的name")
     当为'iframe的name'时,表示该url在iframe中打开
     当为参数时：1._blank  表示在新页面打开 (可通过parent和children属性实现'类模态页面'与主页面的数据交互。以前的使用方法，这样很麻烦)
@@ -63,6 +65,130 @@ window.location.href="" 的含义：window代表浏览器，location代表地址
     如果做查询条件/参数间不属于一个实体类对象/无实体类的主键id，封装成map
     如果做CUD/参数间属于一个实体类对象且有主键id，封装成实体类对象
 
+所有文件下载的请求只能发送同步请求(GET/POST),虽然效果看上去像异步请求
+    1.只能发送同步请求： 因为返回的结果是一个文件，而不是简单的字符串、json等，ajax无法进行解析
+    2.看上去像异步请求： 不让返回结果(一个文件)返回到页面上，而是返回到下载窗口上，也就是说页面并没有刷新/跳转，刷新的是下载窗口
+
+文件下载
+    jsp页面向ActivityController发送下载请求(get/post)
+    -> ActivityController将生成的文件输出到jsp(**OutputStream的路径直接指向jsp文件即可**)
+    -> 浏览器接收到响应信息，《《默认情况下》》会直接在显示窗口打开
+       如果返回的是网页或json则可以直接打开(网页则跳转、json则暂存)
+       如果返回的是Excel这种不可直接打开的文件类型，则自动调用客户端相应软件（WPS、Office等）打开
+       只有实在打不开才会激活文件下载窗口，让用户保存到本地再选择用哪些软件打开
+
+       *如果想优先激活文件下载窗口，则
+        1.设置响应类型为 二进制流数据application/octet-stream
+          格式：response.setContentType("application/octet-stream;charset=UTF-8");
+        2.设置响应头信息Content-Disposition的值为attachment，使浏览器解析到该响应头信息后直接激活文件下载窗口
+          还可以通过filename指定文件的名称及扩展名
+          格式：response.setHeader("Content-Disposition","attachment;filename=my_student_list.xls");
+
+    虽然在使用流的时候会报异常，按常理来说应try..catch捕捉，但是由于最终显示的位置为下载窗口而不是页面，因此即使进行了try..catch，前端也无法查看到
+    也就是说对于文件下载而言，其Controller层的异常应直接throws向上抛出，而不是try..catch捕捉
+
+文件上传
+    所有的文件上传，上传的格式一定是跟用户提前约定好的，否则无法判断应该将当前拿到的单元格值赋给对象的哪个属性
+        对于id而言，要选择自己生成而不能让用户导入，因为可能发生主键冲突（用户瞎jb写），因此会与用户约定不添加id列
+        对于外键而言，一般有四种解决方案：
+            1.根据name去数据库里查id（不可取，反面案例）
+              可能有重名的情况，且会连接磁盘，效率很低
+            2.写一个附录，提供user表，用户手动将name换为对应id（效率最高但不现实，小数据量时可用）
+              用户体验不好，且数据量很大时要配置很久，只适合小数据量
+            3.设置一个公共账户，登陆公共账号的人手动分配外键（最整洁但也最麻烦，至少不需要用户操作）
+              不能实时插入外键，要等后期有人手动分配
+            4.谁导入的谁负责，就是直接获取session域中当前登录的user（最省事，效率也不低，但是外键会被写死而不是动态的）
+              这样会强行将owner设置为当前登录的用户
+        对于其他字段而言，具体情况具体分析，静态字段单独拎出来赋值并与用户约定不添加该字段列，动态字段就按序读取并给对应pojo属性赋值
+    总结：一般会将id（主键）、外键（这里的3、4情况）、静态字段单独拎出来赋值，
+         其余字段要么为动态（就是用户需要在xls中按序提供的）手动按序赋值，要么为空字段（如这里的edit_by和edit_time）无需赋值也无需让用户提供该列
+
+    文件上传的表单必须满足三个条件：
+        1.表单组件标签只能使用<input type="file" />
+        2.如果采用列表form，则请求方式只能用同步请求post
+            get请求只能提交文本数据，参数长度有限制，效率高（数据直接拼接在url后   可以使用缓存机制）
+            post请求能提交文本数据，还能提交二进制数据，参数长度没限制，效率较低（数据要转换放到请求体中   无缓存机制，每次访问都要重新发送请求重新获取数据）
+
+          *如果使用异步请求，必须设置type:'post'
+        3.表单的编码格式enctype只能为  multipart/form-data
+            HTTP协议规定Browser每次向后台提交参数时都会对参数进行统一编码.
+                默认采用application/x-www-form-urlencoded，而这种编码格式只能对文本数据进行处理
+                如果采用默认的编码格式则会这样处理：浏览器向后台提交的参数都会被统一转为字符串，再将这个字符串采用urlencoded进行编码
+                如果采用multipart/form-data（译为：表单数据多样性），则会阻止表单采用默认编码，即上传的是什么数据就是什么数据，不做任何处理
+                      <form action="fileUpload.do" method="post" enctype="multipart/form-data">
+                          <input type="file" name="myFile" />
+                      </form>
+
+           *如果要求异步请求，必须设置processData:false,	//设置ajax向后台提交参数之前，是否把参数统一转换成字符串
+                         		   contentType:false,	//设置ajax向后台提交参数之前，是否把所有的参数统一按urlencoded编码
+    总结：用jQuery发送ajax请求必不可少的几个参数设置：data:formData,	//传入FormData对象
+                                                  processData:false,	//设置ajax向后台提交参数之前，是否把参数统一转换成字符串
+                                                  contentType:false,	//设置ajax向后台提交参数之前，是否把所有的参数统一按urlencoded编码
+                                                  type:'post',
+
+
+    SpringMVC提供了一个MultipartFile类，专门用于接收文件类型的数据，像内置对象一样直接在Controller层的方法参数中用即可
+    该方法会自动接收来自前端发送的文件，当然参数名要与前端发送的<input type="file" name=""/>的name相同，保证自动注入
+
+    但是使用之前必须在springmvc.xml中配置： SpringMVC的文件上传解析器--CommonsMultipartResolver
+    <!-- 配置文件上传解析器   id:必须是multipartResolver，不能省略/改为其他值，否则springmvc无法自动识别并拿到这个bean-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置文件最大上传大小为5M（其实一般不在这里设置，一般在前端进行文件大小的过滤）-->
+        <property name="maxUploadSize" value="#{1024*1024*5}"/>
+        <!--设置文件的默认编码格式-->
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+
+
+
+对于文件而言，
+    直接调用其val()并不能拿到该文件，只能拿到文件的绝对路径名
+        let activityFileName = $("#activityFile").val();
+    想拿到该文件本身，必须先获取其dom对象，再获取其files属性
+        获取dom对象：1.$("#activityFile")[0]	  2.$("#activityFile").get(0)	3.document.getElementsById("activityFile")
+        let activityFile = $("#activityFile")[0].files[0];
+    想获取该文件的大小：在拿到文件本身的基础上获取其size属性（以byte为最小单位）
+        activityFile.size
+
+
+
+Controller层方法的返回类型
+    1.String    常用于同步请求(get/post)，返回一个url进行重定向/请求转发
+    2.Object    常用于异步请求(ajax)，返回一个json让浏览器解析
+    3.void      常用于手动向前端发送文件
+    TIP:同步请求不要让其返回json(就是同步请求的Controller不要让其返回值为Object)
+        浏览器解析不了同步请求的json，只能解析异步请求的json 或 同步请求的url
+
+程序只要访问磁盘就十分吃效率（建立连接->寻找磁道->读取/写入数据），要尽量减少访问这种场景的出现
+    java程序访问数据库就相当于程序访问磁盘
+    HSSFWorkbook的write()方法是将内存中的数据写入磁盘，也相当于程序访问磁盘
+
+    文件导入导出的优化策略
+        文件导出，将 'workbook内存->磁盘->浏览器' 模式变为 'workbook内存->浏览器'
+            OutputStream out = response.getOutputStream();
+            workbook.write(out);
+        文件导入，将 'activityFile内存->磁盘->workbook内存' 模式变为 'activityFile内存->workbook内存'
+            InputStream in = activityFile.getInputStream();
+            HSSFWorkbook workbook = new HSSFWorkbook(in);
+
+前端请求携带数据，可以直接被包装到Controller的参数中
+    1.前端发送同步请求
+        对于get/post，都可以使用form表单的形式发送
+        对于get，可以直接在url后添加?再拼接数据
+            window.location.href="workbench/activity/exportSelectedActivityExcel.do?"+ids;  //传递的是一个属性有一/多个属性值都可
+    2.前端发送异步请求（以jQuery为例）
+        let ids="";
+        $.each(checkeds,function (){ids += "id="+this.value+"&";});
+        ids = ids.substr(0,ids.length-1);
+        let formData = new FormData();
+    	formData.append("activityFile",activityFile);
+        $.ajax({
+            url:'workbench/activity/exportSelectedActivityExcel.do',
+            data:{...},    //只能传递文本，对于传递的是一个属性只有一个属性值
+            data:ids,      //只能传递文本，对于传递的是一个属性有多个属性值
+            data:formData, //可传递文件/文本，可传递一个属性有多个属性值
+            success:function (data) {...}
+        });
 -------------------------------------------------j--s--p--相--关-------------------------------------------------------
 将.html重命名为.jsp不能直接重命名,一定要进行以下操作:
 		需要先将html头<!DOCTYPE html>换为jsp头<%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -154,6 +280,7 @@ regExp.test(String属性)：判断该属性的属性值是否符合正则表达�
 
 js截取字符串：
     str.substr(startIndex,length)  //从下标为startIndex的字符开始截取，截取length个字符
+    str.substr(startIndex)  //从下标为startIndex的字符开始截取，一直截取到最后
     str.substring(startIndex,endIndex)  //从下标为startIndex的字符开始截取，截取到下标是endIndex的字符
 
 

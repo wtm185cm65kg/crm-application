@@ -8,6 +8,8 @@ import com.zzk.crm.contants.Constants;
 import com.zzk.crm.settings.pojo.User;
 import com.zzk.crm.settings.service.UserService;
 import com.zzk.crm.workbench.pojo.Activity;
+import com.zzk.crm.workbench.pojo.ActivityRemark;
+import com.zzk.crm.workbench.service.ActivityRemarkService;
 import com.zzk.crm.workbench.service.ActivityService;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -34,6 +36,8 @@ public class ActivityController {
     private UserService userService;
     @Autowired
     private ActivityService activityService;
+    @Autowired
+    private ActivityRemarkService activityRemarkService;
 
     @RequestMapping("/workbench/activity/index.do")
     public String index(HttpServletRequest request){
@@ -316,8 +320,13 @@ public class ActivityController {
      */
     @RequestMapping("/workbench/activity/detailActivity.do")
     public String detailActivity(String id,HttpServletRequest request){
+        //收集参数（两次查找数据库，第一次根据id取出activity的详细信息，第二次根据activity的id取出activityRemarks的详细信息）
         Activity activity = activityService.queryActivityForDetailById(id);
+        List<ActivityRemark> activityRemarkList = activityRemarkService.queryActivityRemarkForDetailByActivityId(activity.getId());
+
+        //将参数通过request域请求转发给服务器
         request.setAttribute(Constants.REQUEST_ACTIVITY,activity);
+        request.setAttribute(Constants.REQUEST_ACTIVITY_REMARKS,activityRemarkList);
         return "workbench/activity/detail";
     }
 }

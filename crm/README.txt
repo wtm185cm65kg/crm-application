@@ -139,8 +139,6 @@ controller包的放置规则：
         <property name="defaultEncoding" value="utf-8"/>
     </bean>
 
-
-
 对于文件而言，
     直接调用其val()并不能拿到该文件，只能拿到文件的绝对路径名
         let activityFileName = $("#activityFile").val();
@@ -149,8 +147,6 @@ controller包的放置规则：
         let activityFile = $("#activityFile")[0].files[0];
     想获取该文件的大小：在拿到文件本身的基础上获取其size属性（以byte为最小单位）
         activityFile.size
-
-
 
 Controller层方法的返回类型
     1.String    常用于同步请求(get/post)，返回一个url进行重定向/请求转发
@@ -189,6 +185,19 @@ Controller层方法的返回类型
             data:formData, //可传递文件/文本，可传递一个属性有多个属性值
             success:function (data) {...}
         });
+
+使用标签保存数据，以便在需要的时候能够获取到这些数据:
+   给标签添加属性原则（表单组件标签：input、textArea、select...）：
+       如果是表单组件标签，优先使用value属性
+                         当value不方便使用时（有多个值），使用自定义属性;
+       如果不是表单组件标签，不推荐使用value（个别浏览器可能会报错），推荐使用自定义属性。
+   定位标签：
+       优先考虑id属性,其次考虑name属性
+       只有id和name属性都不方便使用时，才考虑使用自定义属性
+<script />代码块中也能使用EL表达式，实际上只要在jsp页面中，el表达式在任意处都可使用
+    如果想将一个el表达式的值当作变量值赋给变量，则：要在el表达式两端加引号，不然会被当做变量处理而不是字符串
+    let activityId = ${requestActivity.id};         //let activityId = gysdvbf564153sdfaa;
+    let activityId = '${requestActivity.id}';       //let activityId = 'gysdvbf564153sdfaa';
 -------------------------------------------------j--s--p--相--关-------------------------------------------------------
 将.html重命名为.jsp不能直接重命名,一定要进行以下操作:
 		需要先将html头<!DOCTYPE html>换为jsp头<%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -216,11 +225,13 @@ jquery的回调函$(function(){});在页面加载完成时才会被调用，相�
 使用jquery获取指定元素的指定属性的值：
   选择器.attr("属性名");    //用来获取那些值不是true/false的属性的值.
   选择器.attr("属性名",属性值);   //给非Boolean属性赋值
-  选择器.val();   //用来获取元素的value属性赋值
-  选择器.val(属性值);   //给元素的value属性赋值
+  选择器.val();   //用来获取元素的value属性赋值(最好是表单组件标签的value)
+  选择器.val(属性值);   //给元素的value属性赋值(最好是表单组件标签的value)
   选择器.prop("属性名");//用来获取值是true/false的属性的值.例如：checked,selected,readonly,disabled等。
   选择器.prop("属性名",true/false);   //给Boolean属性赋值
 
+  TIP:如果获取表单组件标签的value属性值：dom对象.value 或 jquery对象.val()
+      如果自定义的属性，不管是什么标签，只能用：jquery对象.attr("属性名");
 
 jquery事件函数的用法(这里以单击事件click为例)：
    1.给指定的元素添加事件
@@ -270,7 +281,7 @@ regExp.test(String属性)：判断该属性的属性值是否符合正则表达�
   1)原始JS：   onxxxx="function(){}"
   2)使用jquery对象： 选择器.xxxx(function(){});
         缺点：只能给固有元素添加事件
-  3)使用jquery的on函数：  父选择器.on("事件类型",子选择器,function(){});
+  3)使用jquery的on函数：  父选择器.on("事件类型","子选择器",function(){});
             父元素:必须是固有元素.  可以是直接父元素,也可以是间接父元素（原则上：固有父元素范围越小越好）
             事件类型：跟事件属性和事件函数一一对应。
             子选择器：目标元素,是建立在父选择器基础上的
@@ -282,6 +293,14 @@ js截取字符串：
     str.substr(startIndex,length)  //从下标为startIndex的字符开始截取，截取length个字符
     str.substr(startIndex)  //从下标为startIndex的字符开始截取，一直截取到最后
     str.substring(startIndex,endIndex)  //从下标为startIndex的字符开始截取，截取到下标是endIndex的字符
+
+把页面片段显示在动态显示在页面中：
+    选择器.text(htmlStr)：覆盖显示在标签的内部,不支持html语言
+    选择器.html(htmlStr)：覆盖显示在标签的内部,支持html语言
+    选择器.append(htmlStr)：追加显示在指定标签的内部的后边,支持html语言
+
+    选择器.after(htmlStr)：追加显示在指定标签的外部的后边,支持html语言
+    选择器.before(htmlStr)：追加显示在指定标签的外部的前边,支持html语言
 
 
 jQuery的ajax向后台发送请求时，可以通过data提交参数,data的数据格式有三种格式：

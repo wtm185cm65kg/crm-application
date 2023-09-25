@@ -99,5 +99,28 @@ public interface ActivityMapper {
      */
     int insertActivityByList(List<Activity> activityList);
 
+    /**
+     * 根据id查询市场活动信息
+     */
     Activity selectActivityForDetailById(String id);
+
+    /**
+     * 根据clueId查询该线索相关联的市场活动信息
+     */
+    List<Activity> selectActivityForDetailByClueId(String clueId);
+
+    /**
+     * 根据name和clueId查询没有与clueId相关联的市场活动信息
+     */
+    List<Activity> selectActivityForDetailByNameAndClueId(Map<String,Object> map);
+
+    /**
+     * 根据id批量查询市场活动的信息
+     */
+    List<Activity> selectActivityForDetailByIds(String[] ids);
+
+    /**
+     * 根据名称模糊查询市场活动，且该市场活动是在当前线索相关联的市场活动中的
+     */
+    List<Activity> selectActivityForDetailByName(Map<String,Object> map);
 }

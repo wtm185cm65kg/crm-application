@@ -820,7 +820,6 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 				</div>
 			</div>--%>
 		</div>
-		
 	</div>
 </body>
 </html>

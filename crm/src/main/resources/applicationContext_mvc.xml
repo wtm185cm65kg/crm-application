@@ -48,7 +48,7 @@
     <!--配置拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
-            <!--配置拦截的请求-->
+            <!--配置拦截的请求,**表示能扫描到子路径的子路径（多级子路径）-->
             <mvc:mapping path="/settings/**"/>
             <mvc:mapping path="/workbench/**"/>
             <!--配置排除拦截的请求(优先级高于拦截请求)-->

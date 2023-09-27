@@ -5,6 +5,7 @@ import com.zzk.crm.workbench.pojo.ClueRemark;
 import com.zzk.crm.workbench.service.ClueRemarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,5 +17,16 @@ public class ClueRemarkServiceImpl implements ClueRemarkService {
     @Override
     public List<ClueRemark> queryClueRemarkForDetailByClueId(String clueId) {
         return clueRemarkMapper.selectClueRemarkForDetailByClueId(clueId);
+    }
+
+    @Override
+    public List<ClueRemark> queryClueRemarkByClueId(String clueId) {
+        return clueRemarkMapper.selectClueRemarkByClueId(clueId);
+    }
+
+    @Override
+    @Transactional
+    public int dropClueRemarkByClueId(String clueId) {
+        return clueRemarkMapper.deleteClueRemarkByClueId(clueId);
     }
 }

@@ -223,11 +223,35 @@ public class ClueController {
     }
 
 
-    @RequestMapping("/workbench/clue/.do")
+    @RequestMapping("/workbench/clue/convertClue.do")
     @ResponseBody
-    public Object s(String clueId){
+    public Object convertClue(String clueId,String money,String name,String expectedDate,
+                              String stage,String activityId,String isCreateTran,HttpSession session){
+        //封装参数
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id",clueId);
+        map.put("money",money);
+        map.put("name",name);
+        map.put("expectedDate",expectedDate);
+        map.put("stage",stage);
+        map.put("activityId",activityId);
+        map.put("isCreateTran",isCreateTran);
+        map.put(Constants.SESSION_USER,session.getAttribute(Constants.SESSION_USER));
 
+        /**由于转存方法中涉及insert语句，因此要try..catch处理转存方法*/
         ReturnJson returnJson = new ReturnJson();
+        try {
+            /**保存线索转换*/
+            clueService.saveConvert(map);
+
+            /**只要没报异常就说明转存成功（因为转存方法返回值为void，不能通过返回值判断是否转存成功）*/
+            returnJson.setCode(Constants.RETURN_OBJECT_CODE_SUCCESS);
+        }catch (Exception e){
+            e.printStackTrace();
+            /**报异常说明转存失败*/
+            returnJson.setCode(Constants.RETURN_OBJECT_CODE_FAIL);
+            returnJson.setMessage("系统忙，请稍后再试....");
+        }
         return returnJson;
     }
 }

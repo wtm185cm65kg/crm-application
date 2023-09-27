@@ -83,6 +83,46 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 
 		/*给'转换按钮'添加单击事件*/
 		$("#convertBtn").click(function (){
+			//收集参数
+			let clueId='${requestClue.id}';
+			let money=$.trim($("#amountOfMoney").val());
+			let name=$.trim($("#tradeName").val());
+			let expectedDate=$.trim($("#expectedClosingDate").val());
+			let stage=$("#stage").val();
+			let activityId=$("#activityId").val();
+			let isCreateTran=$("#isCreateTransaction").prop("checked");
+
+			//表单验证：money只能是非负整数
+			let regExp=/null|^$|^(([1-9]\d*)|0)$/;
+			if (!regExp.test(money)){
+				alert("money只能是非负整数！");
+				return;
+			}
+
+			//发送请求
+			$.ajax({
+				url:'workbench/clue/convertClue.do',
+				data:{
+					clueId:clueId,
+					money:money,
+					name:name,
+					expectedDate:expectedDate,
+					stage:stage,
+					activityId:activityId,
+					isCreateTran:isCreateTran,
+				},
+				type:'post',
+				dataType:'json',
+				success:function (data){
+					if (data.code=='1'){
+						//转换成功之后,跳转到线索主页面
+						window.location.href="workbench/clue/index.do";
+					}else{
+						//转换失败,提示信息,页面不跳转
+						alert(data.message);
+					}
+				}
+			});
 		});
 	});
 </script>
@@ -175,7 +215,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 		    <select id="stage"  class="form-control">
 		    	<option></option>
 				<c:forEach items="${requestStages}" var="stage">
-					<option>${stage.value}</option>
+					<option value="${stage.id}">${stage.value}</option>
 				</c:forEach>
 		    </select>
 		  </div>

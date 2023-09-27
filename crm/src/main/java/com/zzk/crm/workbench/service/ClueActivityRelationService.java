@@ -8,4 +8,8 @@ public interface ClueActivityRelationService {
     int saveBundleBetweenActivityAndClue(List<ClueActivityRelation> list);
 
     int dropClueActivityRelationByActivityIdAndClueId(ClueActivityRelation clueActivityRelation);
+
+    List<ClueActivityRelation> queryClueActivityRelationByClueId(String clueId);
+
+    int dropClueActivityRelationByClueId(String clueId);
 }

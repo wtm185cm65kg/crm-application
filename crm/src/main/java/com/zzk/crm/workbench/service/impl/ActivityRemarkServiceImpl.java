@@ -20,6 +20,7 @@ public class ActivityRemarkServiceImpl implements ActivityRemarkService {
     }
 
     @Override
+    @Transactional
     public int saveCreateActivityRemark(ActivityRemark remark) {
         return activityRemarkMapper.insertActivityRemark(remark);
     }

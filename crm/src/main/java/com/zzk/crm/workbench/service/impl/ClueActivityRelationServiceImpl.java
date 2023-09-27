@@ -25,4 +25,14 @@ public class ClueActivityRelationServiceImpl implements ClueActivityRelationServ
     public int dropClueActivityRelationByActivityIdAndClueId(ClueActivityRelation clueActivityRelation) {
         return clueActivityRelationMapper.deleteClueActivityRelationByActivityIdAndClueId(clueActivityRelation);
     }
+
+    @Override
+    public List<ClueActivityRelation> queryClueActivityRelationByClueId(String clueId) {
+        return clueActivityRelationMapper.selectClueActivityRelationByClueId(clueId);
+    }
+
+    @Override
+    public int dropClueActivityRelationByClueId(String clueId) {
+        return clueActivityRelationMapper.deleteClueActivityRelationByClueId(clueId);
+    }
 }

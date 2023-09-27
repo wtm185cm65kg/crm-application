@@ -198,6 +198,23 @@ Controller层方法的返回类型
     如果想将一个el表达式的值当作变量值赋给变量，则：要在el表达式两端加引号，不然会被当做变量处理而不是字符串
     let activityId = ${requestActivity.id};         //let activityId = gysdvbf564153sdfaa;
     let activityId = '${requestActivity.id}';       //let activityId = 'gysdvbf564153sdfaa';
+
+对于数据转存，一般放在Service层，而不放在Controller层，因为放在Controller层会显得很乱
+    转存方法的返回值为void而不是int：因为这里面涉及了多个Service层和Mapper层的方法，不方便通过返回值来判断这两个方法是否都执行成功
+                                  只能在该service方法中添加事务、在Controller层通过try..catch,只要没报异常就说明转存成功,否则转存失败
+
+提供配置文件：由用户提供,保存在后台服务器上
+    关于配置文件的选择：
+       a).properties配置文件
+              适合配置简单数据(没有属性、子类的概念,仅仅是一些基础的简单信息)，几乎没有冗余数据，解析、传输效率高
+              解析相对简单：Properties,*ResourceBundle*
+	   b).xml配置文件：标签语言.
+	          适合配置复杂数据(通过属性、子标签几乎能表示所有复杂情景)，产生冗余数据，效率低
+              解析相对复杂：jdom,*dom4j*
+       总结：优先使用.properties，如果.properties不能解决再使用.xml
+
+       这里配置可能性：约定文件名为possibility.properties,放在resources包下
+                      阶段的名称（理论上来说使用id更好,不过这里由用户提供,只能用name了）做key、可能性做value
 -------------------------------------------------j--s--p--相--关-------------------------------------------------------
 将.html重命名为.jsp不能直接重命名,一定要进行以下操作:
 		需要先将html头<!DOCTYPE html>换为jsp头<%@ page contentType="text/html;charset=UTF-8" language="java" %>

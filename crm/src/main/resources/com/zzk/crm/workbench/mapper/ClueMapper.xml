@@ -355,8 +355,9 @@
         and state=#{state}
       </if>
     </where>
-    order by create_time desc
-    limit #{beginNo},#{pageSize}
+    order by c.create_time desc
+    limit
+        #{beginNo},#{pageSize}
   </select>
 
   <select id="selectCountOfClue" resultType="int">
@@ -403,6 +404,7 @@
         left join tbl_user u3 on c.edit_by=u3.id
     where
         c.id=#{id}
+    order by create_time
   </select>
 
   <select id="selectClueById" parameterType="string" resultMap="BaseResultMap">
@@ -417,4 +419,71 @@
   <delete id="deleteClueById" parameterType="string">
     delete from tbl_clue where id=#{id}
   </delete>
+
+  <delete id="deleteClueByIds" parameterType="string">
+    delete from tbl_clue where id in(
+        <foreach collection="array" item="id" separator=",">
+          #{id}
+        </foreach>
+      )
+  </delete>
+
+  <update id="updateClue" parameterType="com.zzk.crm.workbench.pojo.Clue">
+    update
+        tbl_clue
+    <set>
+      <if test="owner!=null and owner!=''">
+        owner = #{owner},
+      </if>
+      <if test="company!=null and company!=''">
+        company = #{company},
+      </if>
+      <if test="appellation!=null and appellation!=''">
+        appellation = #{appellation},
+      </if>
+      <if test="fullname!=null and fullname!=''">
+        fullname = #{fullname},
+      </if>
+      <if test="job!=null and job!=''">
+        job = #{job},
+      </if>
+      <if test="email!=null and email!=''">
+        email = #{email},
+      </if>
+      <if test="phone!=null and phone!=''">
+        phone = #{phone},
+      </if>
+      <if test="website!=null and website!=''">
+        website = #{website},
+      </if>
+      <if test="mphone!=null and mphone!=''">
+        mphone = #{mphone},
+      </if>
+      <if test="state!=null and state!=''">
+        state = #{state},
+      </if>
+      <if test="source!=null and source!=''">
+        source = #{source},
+      </if>
+      <if test="description!=null and description!=''">
+        description = #{description},
+      </if>
+      <if test="contactSummary!=null and contactSummary!=''">
+        contact_summary = #{contactSummary},
+      </if>
+      <if test="nextContactTime!=null and nextContactTime!=''">
+        next_contact_time = #{nextContactTime},
+      </if>
+      <if test="address!=null and address!=''">
+        address = #{address},
+      </if>
+      <if test="editTime!=null and editTime!=''">
+        edit_time = #{editTime},
+      </if>
+      <if test="editBy!=null and editBy!=''">
+        edit_by = #{editBy},
+      </if>
+    </set>
+    where id=#{id}
+  </update>
 </mapper>

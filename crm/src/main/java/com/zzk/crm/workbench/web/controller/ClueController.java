@@ -254,4 +254,56 @@ public class ClueController {
         }
         return returnJson;
     }
+
+    @RequestMapping("/workbench/clue/dropClueByIds.do")
+    @ResponseBody
+    public Object dropClueByIds(String[] id){
+        ReturnJson returnJson = new ReturnJson();
+
+        try {
+            int ret = clueService.dropClueByIds(id);
+            if (ret>0||ret==-2){
+                returnJson.setCode(Constants.RETURN_OBJECT_CODE_SUCCESS);
+            }else{
+                returnJson.setCode(Constants.RETURN_OBJECT_CODE_FAIL);
+                returnJson.setMessage("系统忙，请稍后再试....");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnJson.setMessage("系统忙，请稍后再试....");
+        }
+
+        return returnJson;
+    }
+
+    @RequestMapping("/workbench/activity/queryClueById.do")
+    @ResponseBody
+    public Object queryClueById(String id){
+        Clue clue = clueService.queryClueById(id);
+        return clue;
+    }
+
+    @RequestMapping("/workbench/activity/modifyClue.do")
+    @ResponseBody
+    public Object modifyClue(Clue clue,HttpSession session){
+        User user = (User) session.getAttribute(Constants.SESSION_USER);
+
+        clue.setEditBy(user.getId());
+        clue.setEditTime(DateUtil.formatDateTime19(new Date()));
+
+        ReturnJson returnJson = new ReturnJson();
+        try {
+            int ret = clueService.modifyClue(clue);
+            if (ret==1){
+                returnJson.setCode(Constants.RETURN_OBJECT_CODE_SUCCESS);
+            }else{
+                returnJson.setCode(Constants.RETURN_OBJECT_CODE_FAIL);
+                returnJson.setMessage("系统忙，请稍后再试....");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnJson.setMessage("系统忙，请稍后再试....");
+        }
+        return returnJson;
+    }
 }

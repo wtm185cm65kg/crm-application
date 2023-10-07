@@ -148,6 +148,12 @@ controller包的放置规则：
     想获取该文件的大小：在拿到文件本身的基础上获取其size属性（以byte为最小单位）
         activityFile.size
 
+button按钮的类别：button和submit
+    <button type="submit" id="queryClueBtn">查询</button>
+    <button type="button" id="queryClueBtn">查询</button>
+    如果为该按钮添加事件，且发送的是异步请求，则必须使用type="button"，如果使用type="submit"则在发送异步请求后还会发送同步请求，导致功能失效
+    如果为该按钮添加事件，且发送的是同步请求，则最好使用type="submit"，这样发送请求时才能携带表单数据
+
 Controller层方法的返回类型
     1.String    常用于同步请求(get/post)，返回一个url进行重定向/请求转发
     2.Object    常用于异步请求(ajax)，返回一个json让浏览器解析
@@ -215,6 +221,11 @@ Controller层方法的返回类型
 
        这里配置可能性：约定文件名为possibility.properties,放在resources包下
                       阶段的名称（理论上来说使用id更好,不过这里由用户提供,只能用name了）做key、可能性做value
+
+关于pojo类的属性
+    数据库中的表在java中一定有实体类相对应，**数据库表中一个字段在实体类中一定有属性相对应**(数据库的字段在pojo类中必须有一个属性与之对应)
+    java中的实体类在数据库中不一定有表相对应，**实体类中的属性在数据库表中也不一定有字段相对应**(在保证上面的前提下，pojo类的属性可根据需要自行添加)
+    比如与阶段stage相关联的可能性possibility属性，虽然不属于数据库字段，但与pojo类有关联，可以考虑在pojo类中添加该字段
 -------------------------------------------------j--s--p--相--关-------------------------------------------------------
 将.html重命名为.jsp不能直接重命名,一定要进行以下操作:
 		需要先将html头<!DOCTYPE html>换为jsp头<%@ page contentType="text/html;charset=UTF-8" language="java" %>

@@ -148,12 +148,11 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>-->
-
-        <!--
-           <table tableName="tbl_transaction_history" domainObjectName="TransactionHistory" enableCountByExample="false"
-                  enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-                  selectByExampleQueryId="false"></table>
-                  -->
+       <!--<table tableName="tbl_tran_history" domainObjectName="TranHistory"
+              enableCountByExample="false" enableUpdateByExample="false"
+              enableDeleteByExample="false" enableSelectByExample="false"
+              selectByExampleQueryId="false">
+       </table>-->
 
     </context>
 </generatorConfiguration>

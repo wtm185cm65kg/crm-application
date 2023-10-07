@@ -83,4 +83,14 @@ public interface ClueMapper {
      * 根据id删除线索
      */
     int deleteClueById(String id);
+
+    /**
+     * 根据id批量删除线索
+     */
+    int deleteClueByIds(String[] ids);
+
+    /**
+     * 修改线索
+     */
+    int updateClue(Clue clue);
 }

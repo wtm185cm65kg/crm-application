@@ -235,4 +235,19 @@ public class ClueServiceImpl implements ClueService {
         clueRemarkService.dropClueRemarkByClueId(clueId); //删除线索的备注
         dropClueById(clueId); //删除线索
     }
+
+    @Override
+    public int dropClueByIds(String[] ids) {
+        return clueMapper.deleteClueByIds(ids);
+    }
+
+    @Override
+    public Clue queryClueById(String id) {
+        return clueMapper.selectClueById(id);
+    }
+
+    @Override
+    public int modifyClue(Clue clue) {
+        return clueMapper.updateClue(clue);
+    }
 }

@@ -22,6 +22,11 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 		$("#createTranBtn").click(function (){
 			window.location.href="workbench/transaction/toSave.do";
 		});
+
+		/*批量给'交易名称'添加单击事件*/
+		$("#tBody").on("click","a",function (){
+			window.location.href="workbench/transaction/toDetail.do?tranId="+$(this).attr("tranId");
+		});
 	});
 </script>
 </head>
@@ -135,10 +140,22 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 							<td>联系人名称</td>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
+					<tbody id="tBody">
+						<c:forEach items="${tranList}" var="tran">
+							<tr>
+								<td><input type="checkbox" /></td>
+								<td><a style="text-decoration: none; cursor: pointer;" tranId="${tran.id}">${tran.name}</a></td>
+								<td>${tran.customerId}</td>
+								<td>${tran.stage}</td>
+								<td>${tran.type}</td>
+								<td>${tran.owner}</td>
+								<td>${tran.source}</td>
+								<td>${tran.contactsId}</td>
+							</tr>
+						</c:forEach>
+						<%--<tr>
 							<td><input type="checkbox" /></td>
-							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">动力节点-交易01</a></td>
+							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.jsp';">动力节点-交易01</a></td>
 							<td>动力节点</td>
 							<td>谈判/复审</td>
 							<td>新业务</td>
@@ -148,14 +165,14 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 						</tr>
                         <tr class="active">
                             <td><input type="checkbox" /></td>
-                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">动力节点-交易01</a></td>
+                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.jsp';">动力节点-交易01</a></td>
                             <td>动力节点</td>
                             <td>谈判/复审</td>
                             <td>新业务</td>
                             <td>zhangsan</td>
                             <td>广告</td>
                             <td>李四</td>
-                        </tr>
+                        </tr>--%>
 					</tbody>
 				</table>
 			</div>

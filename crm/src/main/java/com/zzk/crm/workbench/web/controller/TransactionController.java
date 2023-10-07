@@ -9,7 +9,11 @@ import com.zzk.crm.settings.pojo.User;
 import com.zzk.crm.settings.service.DicValueService;
 import com.zzk.crm.settings.service.UserService;
 import com.zzk.crm.workbench.pojo.Tran;
+import com.zzk.crm.workbench.pojo.TranHistory;
+import com.zzk.crm.workbench.pojo.TranRemark;
 import com.zzk.crm.workbench.service.CustomerService;
+import com.zzk.crm.workbench.service.TranHistoryService;
+import com.zzk.crm.workbench.service.TranRemarkService;
 import com.zzk.crm.workbench.service.TranService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +34,11 @@ public class TransactionController {
     private CustomerService customerService;
     @Autowired
     private TranService tranService;
+    @Autowired
+    private TranRemarkService tranRemarkService;
+    @Autowired
+    private TranHistoryService tranHistoryService;
+
 
     @RequestMapping("/workbench/transaction/index.do")
     public String index(HttpServletRequest request){
@@ -37,10 +46,12 @@ public class TransactionController {
         List<DicValue> transactionTypeList = dicValueService.queryDicValueByTypeCode("transactionType");
         List<DicValue> stageList = dicValueService.queryDicValueByTypeCode("stage");
         List<DicValue> sourceList = dicValueService.queryDicValueByTypeCode("source");
+        List<Tran> tranList = tranService.queryAllTran();
 
         request.setAttribute("stageList",stageList);
         request.setAttribute("transactionTypeList",transactionTypeList);
         request.setAttribute("sourceList",sourceList);
+        request.setAttribute("tranList",tranList);
 
         return "workbench/transaction/index";
     }
@@ -134,5 +145,27 @@ public class TransactionController {
             returnJson.setMessage("系统忙，请稍后再试....");
         }
         return returnJson;
+    }
+
+    @RequestMapping("/workbench/transaction/toDetail.do")
+    public String toDetail(String tranId,HttpServletRequest request){
+        Tran tran = tranService.queryTranForDetailById(tranId);
+        List<TranRemark> tranRemarkList = tranRemarkService.queryTranRemarkForDetailByTranId(tranId);
+        List<TranHistory> tranHistoryList = tranHistoryService.queryTranHistoryForDetailByTranId(tranId);
+
+        request.setAttribute("tran",tran);
+        request.setAttribute("tranRemarkList",tranRemarkList);
+        request.setAttribute("tranHistoryList",tranHistoryList);
+
+        //根据交易的阶段名获取对应的可能性
+        ResourceBundle bundle = ResourceBundle.getBundle("possibility");
+        String possibility = bundle.getString(tran.getStage());
+        request.setAttribute("possibility",possibility);
+
+        //获取所有的阶段信息
+        List<DicValue> stageList = dicValueService.queryDicValueByTypeCode("stage");
+        request.setAttribute("stageList",stageList);
+
+        return "workbench/transaction/detail";
     }
 }
